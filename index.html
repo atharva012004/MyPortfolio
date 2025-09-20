@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atharva Shihurkar - Software Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Atharva</span>
+                <span class="logo-dot">.</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="text-gradient">Atharva Shihurkar</span>
+                    </h1>
+                    <div class="hero-subtitle">
+                        <span>I'm a </span>
+                        <span class="typing-text" id="typing-text">Software Developer</span>
+                        <span class="cursor">|</span>
+                    </div>
+                    <p class="hero-description">
+                        Passionate undergraduate student specializing in full-stack development, 
+                        open-source contribution, and creating innovative digital solutions.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Get In Touch</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="https://drive.google.com/file/d/1KS27zpOrEALwGpzDsFpDOl2-sS0IMrX3/view" class="btn btn-secondary">
+                            <i class="fas fa-download"></i>
+                            <span>Download Resume</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-container">
+                        <div class="image-glow"></div>
+                        <img src="./Images/me.png" alt="Atharva Shihurkar" class="profile-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-subtitle">Get to know me better</div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">
+                        Hello! I'm Atharva Shihurkar, an undergraduate student 👨‍💻 passionate about IT and constantly eager to learn and grow. With a strong foundation in programming languages like C, HTML, and CSS, I have also developed skills in JavaScript and React.
+                    </p>
+                    <p class="about-description">
+                        I am proficient in frameworks such as Bootstrap and Tailwind CSS. I have enhanced my experience as a student coordinator in the coding club at MGI and recently became an open-source contributor in VSOC 2024.
+                    </p>
+                    <p class="about-description">
+                        In my free time, I enjoy playing sports like cricket 🏏 and football ⚽️, which instill values of collaboration, teamwork, strategic thinking, and adaptation. I also enjoy listening to music🎵 and reading science fiction books📖.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">6+</div>
+                            <div class="stat-label">Certificates</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-tech">
+                    <h3>Technologies I Love</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-bootstrap"></i>
+                            <span>Bootstrap</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-code"></i>
+                            <span>C++</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="section-subtitle">Technologies I work with</div>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="category-title">Programming Languages</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">C++</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">CSS</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="category-title">Frameworks & Libraries</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">React</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Bootstrap</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Tailwind CSS</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">Tools & Technologies</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Git</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">GitHub</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">VS Code</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-subtitle">Some of my recent work</div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./Images/smilecare.png" alt="Smile Care">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/atharva012004/Dental-Care-Services" class="project-link" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://smilecare-seven.vercel.app/" class="project-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Smile Care</h3>
+                        <p class="project-description">
+                            Your go-to platform for convenient appointment booking, finding top dental professionals, and more tailored to your smile's needs.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">React</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Learn Ease">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/atharva012004/Learnease" class="project-link" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://project-expo-kappa.vercel.app/" class="project-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Learn Ease</h3>
+                        <p class="project-description">
+                            Your ultimate destination for IT and marketing courses, offering students seamless access to expert-led training and career-boosting skills.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Education & Certificates</h2>
+                <div class="section-subtitle">My learning journey</div>
+            </div>
+            <div class="education-content">
+                <div class="education-timeline">
+                    <h3>Education</h3>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Mahakal Institute of Technology, Ujjain</h4>
+                            <p class="timeline-period">2022 - 2026</p>
+                            <p class="timeline-description">Undergraduate - Current</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>St. Joseph's Co-Ed Sr-Sec School, Bhopal</h4>
+                            <p class="timeline-period">2008 - 2021</p>
+                            <p class="timeline-description">Secondary Education - Completed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificates">
+                    <h3>Certificates</h3>
+                    <div class="certificates-grid">
+                        <div class="certificate-item">
+                            <i class="fas fa-robot"></i>
+                            <h4>Artificial Intelligence</h4>
+                            <p>Comprehensive AI course covering machine learning fundamentals</p>
+                            <a href="https://drive.google.com/file/d/1s74EeV5w15YrJQkX8TEOdZrGF6FRO8KH/view?usp=drive_link" class="certificate-link" target="_blank">View Certificate</a>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-code"></i>
+                            <h4>C++ Bootcamp</h4>
+                            <p>Intensive programming course in C++ development</p>
+                            <a href="https://drive.google.com/file/d/1O9x3ZVHsDEl6Rw3_iz0Lku1Xw-U8Ciy6/view?usp=drive_link" class="certificate-link" target="_blank">View Certificate</a>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-brain"></i>
+                            <h4>AI for Everyone</h4>
+                            <p>Introduction to artificial intelligence concepts</p>
+                            <a href="https://coursera.org/share/3c663f8e4a5591707f1489c7532e85c1" class="certificate-link" target="_blank">View Certificate</a>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fab fa-python"></i>
+                            <h4>Python Crash Course</h4>
+                            <p>Complete Python programming fundamentals</p>
+                            <a href="https://coursera.org/share/c8f0cdc24ce52b6daae3b811d6c995e7" class="certificate-link" target="_blank">View Certificate</a>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-satellite"></i>
+                            <h4>Remote Sensing & GIS</h4>
+                            <p>Geographic Information Systems and remote sensing</p>
+                            <a href="https://drive.google.com/file/d/1MNGaRZu-lgovSSOFzG7UdedEZwsFuDf6/view?usp=drive_link" class="certificate-link" target="_blank">View Certificate</a>
+                        </div>
+                        <div class="certificate-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <h4>C++ for C Programmers</h4>
+                            <p>Advanced C++ programming techniques</p>
+                            <a href="https://www.coursera.org/account/accomplishments/verify/UPVXQEPCWKRU?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" class="certificate-link" target="_blank">View Certificate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-subtitle">Let's work together</div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>atharavashihurkar@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Ujjain, India</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/atharva012004" class="social-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/atharva-shihurkar-527b11358/" class="social-link" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.instagram.com/atharva_shihurkar_7/" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                        <span class="error-message" id="subject-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <span class="error-message" id="message-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-btn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading hidden">Sending...</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <div class="form-message" id="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Atharva Shihurkar. All rights reserved.</p>
+                <p>Made with <i class="fas fa-heart"></i> and lots of coffee ☕</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
