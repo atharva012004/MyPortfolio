@@ -342,7 +342,7 @@ function setupContactForm() {
         };
 
         // Send email using EmailJS
-        emailjs.send('service_myzw6ij', 'template_b90aveh', templateParams, 'HCAYh5sJrMQB4ULIX');
+        emailjs.send('service_myzw6ij', 'template_b90aveh', templateParams, 'HCAYh5sJrMQB4ULIX')
             .then(function(response) {
                 showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
                 contactForm.reset();
