@@ -1,6 +1,6 @@
 // Initialize EmailJS
 (function() {
-    emailjs.init("HCAYh5sJrMQB4ULIX"); // Replace with your actual public key
+    emailjs.init("HCAYh5sJrMQB4ULIX"); // Your actual public key
 })();
 
 // Global variables
@@ -317,7 +317,63 @@ function animateCounters() {
     });
 }
 
-// Contact Form Setup
+// Notification function
+function showNotification(message, type = 'success') {
+    // Remove existing notification if any
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        max-width: 300px;
+        word-wrap: break-word;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    `;
+    
+    // Set background color based on type
+    if (type === 'success') {
+        notification.style.background = 'linear-gradient(135deg, #00d4ff, #0099cc)';
+    } else if (type === 'error') {
+        notification.style.background = 'linear-gradient(135deg, #ff4757, #c44569)';
+    }
+    
+    // Add to DOM
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 300);
+    }, 5000);
+}
+
+// Contact Form Setup - FIXED VERSION
 function setupContactForm() {
     const contactForm = document.getElementById('contact-form');
     if (!contactForm) return;
@@ -328,22 +384,46 @@ function setupContactForm() {
         const submitBtn = contactForm.querySelector('.submit-btn');
         const formData = new FormData(contactForm);
 
+        // Get form values
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const subject = formData.get('subject');
+        const message = formData.get('message');
+
+        // Basic validation
+        if (!name || !email || !subject || !message) {
+            showNotification('Please fill in all fields.', 'error');
+            return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address.', 'error');
+            return;
+        }
+
         // Show loading state
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
 
-        // Prepare email data
+        // Prepare email data - CORRECTED TEMPLATE PARAMS
         const templateParams = {
-            from_name: formData.get('name'),
-            from_email: formData.get('email'),
-            subject: formData.get('subject'),
-            message: formData.get('message'),
-            to_email: 'atharavashihurkar@gmail.com' // Your email
+            from_name: name,
+            from_email: email,
+            subject: subject,
+            message: message,
+            reply_to: email
         };
 
-        // Send email using EmailJS
-        emailjs.send('service_myzw6ij', 'template_b90aveh', templateParams, 'HCAYh5sJrMQB4ULIX')
+        console.log('Sending email with params:', templateParams);
+
+        // Send email using EmailJS - REMOVED THE PUBLIC KEY FROM HERE
+        emailjs.send('service_myzw6ij', 'template_b90aveh', templateParams)
             .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
                 showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
                 contactForm.reset();
 
@@ -354,15 +434,22 @@ function setupContactForm() {
                     label.style.fontSize = '1rem';
                     label.style.color = 'var(--text-muted)';
                 });
+
+                // Remove data-filled attributes
+                const inputs = contactForm.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    input.removeAttribute('data-filled');
+                });
             })
             .catch(function(error) {
-                showNotification('Failed to send message. Please try again.', 'error');
-                console.error('EmailJS error:', error);
+                console.log('FAILED...', error);
+                showNotification('Failed to send message. Please try again or contact me directly.', 'error');
             })
             .finally(function() {
                 // Reset button state
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
             });
     });
 
@@ -592,28 +679,24 @@ function detectTheme() {
 // Initialize theme detection
 detectTheme();
 
-// Email Configuration Instructions
+// Console success message
 console.log(`
-🚀 Portfolio Setup Instructions:
+🚀 Portfolio EmailJS Configuration:
 
-To enable email functionality:
+✅ EmailJS initialized with public key: HCAYh5sJrMQB4ULIX
+✅ Service ID: service_myzw6ij
+✅ Template ID: template_b90aveh
+✅ Form validation added
+✅ Loading states implemented
+✅ Success/Error notifications added
 
-1. Create an EmailJS account at https://emailjs.com
-2. Create a service (Gmail, Outlook, etc.)
-3. Create an email template with these variables:
-   - {{from_name}}
-   - {{from_email}} 
-   - {{subject}}
-   - {{message}}
-   - {{to_email}}
-4. Replace the placeholders in setupContactForm():
-   - serviceID: 'your_service_id'
-   - templateID: 'your_template_id'  
-   - publicKey: 'your_public_key'
-5. Uncomment the actual emailjs.send() code
-6. Remove the setTimeout simulation
+Your contact form should now work properly! 🎉
 
-Your portfolio is ready to impress recruiters! 🎉
+If you're still not receiving emails, check:
+1. EmailJS dashboard for failed requests
+2. Email template variable names match
+3. Service is properly connected
+4. Spam folder in your email
 `);
 
 // Export functions for potential module usage
