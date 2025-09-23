@@ -1,6 +1,31 @@
-// Initialize EmailJS
+// Initialize EmailJS with comprehensive checking
 (function() {
-    emailjs.init("HCAYh5sJrMQB4ULIX"); // Your actual public key
+    console.log('🔧 Initializing EmailJS...');
+    
+    // Check if EmailJS script is loaded
+    if (typeof emailjs === 'undefined') {
+        console.error('❌ EmailJS library not found! Please add this to your HTML head:');
+        console.error('<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>');
+        return;
+    }
+    
+    try {
+        emailjs.init("HCAYh5sJrMQB4ULIX");
+        console.log('✅ EmailJS initialized successfully with public key: HCAYh5sJrMQB4ULIX');
+        
+        // Test EmailJS connection (optional)
+        setTimeout(() => {
+            console.log('🔍 Testing EmailJS configuration...');
+            console.log('📋 Current Configuration:');
+            console.log('   - Public Key: HCAYh5sJrMQB4ULIX');
+            console.log('   - Service ID: service_myzw6ij');
+            console.log('   - Template ID: template_b90aveh');
+            console.log('💡 If emails fail, verify these IDs in your EmailJS dashboard');
+        }, 1000);
+        
+    } catch (error) {
+        console.error('❌ Failed to initialize EmailJS:', error);
+    }
 })();
 
 // Global variables
@@ -373,13 +398,19 @@ function showNotification(message, type = 'success') {
     }, 5000);
 }
 
-// Contact Form Setup - FIXED VERSION
+// Contact Form Setup - ENHANCED DEBUGGING VERSION
 function setupContactForm() {
     const contactForm = document.getElementById('contact-form');
-    if (!contactForm) return;
+    if (!contactForm) {
+        console.error('❌ Contact form not found! Make sure you have an element with id="contact-form"');
+        return;
+    }
+
+    console.log('✅ Contact form found, setting up event listener...');
 
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        console.log('📧 Form submitted, processing...');
 
         const submitBtn = contactForm.querySelector('.submit-btn');
         const formData = new FormData(contactForm);
@@ -390,8 +421,11 @@ function setupContactForm() {
         const subject = formData.get('subject');
         const message = formData.get('message');
 
+        console.log('📝 Form data:', { name, email, subject, message });
+
         // Basic validation
         if (!name || !email || !subject || !message) {
+            console.warn('⚠️ Validation failed: Missing required fields');
             showNotification('Please fill in all fields.', 'error');
             return;
         }
@@ -399,17 +433,30 @@ function setupContactForm() {
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
+            console.warn('⚠️ Validation failed: Invalid email format');
             showNotification('Please enter a valid email address.', 'error');
             return;
         }
 
-        // Show loading state
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
+        console.log('✅ Validation passed, preparing to send email...');
 
-        // Prepare email data - CORRECTED TEMPLATE PARAMS
+        // Show loading state
+        if (submitBtn) {
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+        }
+
+        // Check if EmailJS is loaded
+        if (typeof emailjs === 'undefined') {
+            console.error('❌ EmailJS is not loaded! Make sure you included the EmailJS script in your HTML');
+            showNotification('Email service not loaded. Please refresh the page and try again.', 'error');
+            resetButton();
+            return;
+        }
+
+        // Prepare email data with detailed logging
         const templateParams = {
             from_name: name,
             from_email: email,
@@ -418,21 +465,28 @@ function setupContactForm() {
             reply_to: email
         };
 
-        console.log('Sending email with params:', templateParams);
+        console.log('📨 Sending email with these parameters:', templateParams);
+        console.log('🔧 Using Service ID: service_myzw6ij');
+        console.log('🔧 Using Template ID: template_b90aveh');
 
-        // Send email using EmailJS - REMOVED THE PUBLIC KEY FROM HERE
+        // Send email using EmailJS with detailed error handling
         emailjs.send('service_myzw6ij', 'template_b90aveh', templateParams)
             .then(function(response) {
-                console.log('SUCCESS!', response.status, response.text);
+                console.log('🎉 SUCCESS! Email sent successfully');
+                console.log('📊 Response status:', response.status);
+                console.log('📊 Response text:', response.text);
+                
                 showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
                 contactForm.reset();
 
                 // Reset form labels
                 const labels = contactForm.querySelectorAll('label');
                 labels.forEach(label => {
-                    label.style.top = '1rem';
-                    label.style.fontSize = '1rem';
-                    label.style.color = 'var(--text-muted)';
+                    if (label.style) {
+                        label.style.top = '1rem';
+                        label.style.fontSize = '1rem';
+                        label.style.color = 'var(--text-muted)';
+                    }
                 });
 
                 // Remove data-filled attributes
@@ -442,15 +496,51 @@ function setupContactForm() {
                 });
             })
             .catch(function(error) {
-                console.log('FAILED...', error);
-                showNotification('Failed to send message. Please try again or contact me directly.', 'error');
+                console.error('❌ EmailJS FAILED with error:', error);
+                
+                // More specific error messages
+                let errorMessage = 'Failed to send message. ';
+                
+                if (error.status === 400) {
+                    errorMessage += 'Bad request - please check your form data.';
+                    console.error('💡 Suggestion: Check if all template variables match your EmailJS template');
+                } else if (error.status === 401) {
+                    errorMessage += 'Unauthorized - please check your EmailJS configuration.';
+                    console.error('💡 Suggestion: Verify your public key, service ID, and template ID');
+                } else if (error.status === 404) {
+                    errorMessage += 'Service or template not found.';
+                    console.error('💡 Suggestion: Check your service ID and template ID in EmailJS dashboard');
+                } else if (error.status === 429) {
+                    errorMessage += 'Too many requests. Please try again later.';
+                } else {
+                    errorMessage += 'Please try again or contact me directly.';
+                }
+                
+                console.error('🔍 Debug info:');
+                console.error('- Public Key:', 'HCAYh5sJrMQB4ULIX');
+                console.error('- Service ID:', 'service_myzw6ij');
+                console.error('- Template ID:', 'template_b90aveh');
+                console.error('- Error Status:', error.status);
+                console.error('- Error Text:', error.text);
+                
+                showNotification(errorMessage, 'error');
             })
             .finally(function() {
-                // Reset button state
+                resetButton();
+            });
+
+        function resetButton() {
+            if (submitBtn) {
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            });
+                submitBtn.textContent = submitBtn.getAttribute('data-original-text') || 'Send Message';
+            }
+        }
+
+        // Store original button text
+        if (submitBtn && !submitBtn.getAttribute('data-original-text')) {
+            submitBtn.setAttribute('data-original-text', submitBtn.textContent);
+        }
     });
 
     // Form validation and styling
@@ -470,6 +560,8 @@ function setupContactForm() {
             }
         });
     });
+
+    console.log('✅ Contact form setup completed');
 }
 
 // Smooth Scrolling
@@ -679,24 +771,57 @@ function detectTheme() {
 // Initialize theme detection
 detectTheme();
 
-// Console success message
+// Console setup and troubleshooting guide
 console.log(`
-🚀 Portfolio EmailJS Configuration:
+🚀 Portfolio EmailJS Debug Guide:
 
-✅ EmailJS initialized with public key: HCAYh5sJrMQB4ULIX
-✅ Service ID: service_myzw6ij
+📧 Current Configuration:
+✅ Public Key: HCAYh5sJrMQB4ULIX
+✅ Service ID: service_myzw6ij  
 ✅ Template ID: template_b90aveh
-✅ Form validation added
-✅ Loading states implemented
-✅ Success/Error notifications added
 
-Your contact form should now work properly! 🎉
+🔍 If emails are failing, check these steps:
 
-If you're still not receiving emails, check:
-1. EmailJS dashboard for failed requests
-2. Email template variable names match
-3. Service is properly connected
-4. Spam folder in your email
+1. 📝 EmailJS Script Loading:
+   Make sure you have this in your HTML <head>:
+   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+2. 🔑 Verify IDs in EmailJS Dashboard:
+   - Login to https://dashboard.emailjs.com
+   - Check if Service ID "service_myzw6ij" exists and is active
+   - Check if Template ID "template_b90aveh" exists
+   - Verify your Public Key matches "HCAYh5sJrMQB4ULIX"
+
+3. 📋 Template Variables (must match exactly):
+   Your EmailJS template should contain:
+   {{from_name}} - Sender's name
+   {{from_email}} - Sender's email  
+   {{subject}} - Message subject
+   {{message}} - Message content
+   {{reply_to}} - Reply email
+
+4. ⚙️ Service Configuration:
+   - Make sure your email service (Gmail/Outlook) is connected
+   - Check if service has any restrictions or limits
+   - Verify the "To Email" is set correctly in template
+
+5. 🌐 Check Browser Console:
+   - Open DevTools (F12) → Console tab
+   - Submit the form and look for detailed error messages
+   - Error status codes will help identify the issue
+
+6. 📬 Test in EmailJS Dashboard:
+   - Go to your template in dashboard
+   - Use "Test" button with sample data
+   - This will help verify if the issue is with configuration
+
+💡 Common Issues:
+- Status 401: Wrong public key or service ID
+- Status 404: Service or template doesn't exist  
+- Status 400: Template variables don't match
+- Status 429: Rate limit exceeded (wait and try again)
+
+🎯 Your form will now show detailed errors in console!
 `);
 
 // Export functions for potential module usage
