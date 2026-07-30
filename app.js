@@ -132,7 +132,10 @@ function setupNetworkCanvas() {
     }
 
     function createNodes() {
-        const count = Math.min(70, Math.floor((width * height) / 16000));
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const cap = isMobile ? 24 : 70;
+        const density = isMobile ? 26000 : 16000;
+        const count = Math.min(cap, Math.floor((width * height) / density));
         nodes = Array.from({ length: count }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
@@ -184,12 +187,16 @@ function setupNetworkCanvas() {
             ctx.fill();
         });
 
-        requestAnimationFrame(step);
+        if (!document.hidden) requestAnimationFrame(step);
     }
 
     resize();
     createNodes();
     step();
+
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) requestAnimationFrame(step);
+    });
 
     window.addEventListener('resize', () => { resize(); createNodes(); });
     window.addEventListener('mousemove', (e) => {
