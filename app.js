@@ -10,7 +10,7 @@
         return;
     }
     try {
-        emailjs.init({ publicKey: 'HCAYh5sJrMQB4ULIX' });
+        emailjs.init({ publicKey: 'xtcLDPz172eDQGBro' });
     } catch (error) {
         console.error('Failed to initialize EmailJS:', error);
     }
@@ -539,7 +539,7 @@ function setupContactForm() {
             return;
         }
 
-        emailjs.send('service_myzw6ij', 'template_b90aveh', {
+        emailjs.send('service_vzydq35', 'template_t67vjqn', {
             from_name: name, from_email: email, subject, message, reply_to: email
         }).then(() => {
             showNotification("Message sent! I'll get back to you soon.", 'success');
